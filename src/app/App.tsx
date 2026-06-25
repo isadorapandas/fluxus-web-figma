@@ -9,7 +9,7 @@ const GOLD_MID = "rgba(196,154,60,0.45)";
 const TEXT = "#e0d4bc";
 const TEXT_DIM = "rgba(224,212,188,0.58)";
 const TEXT_FAINT = "rgba(224,212,188,0.28)";
-const BG = /* "#0c0a07";*/ "rgb(44, 1, 75)"; // Slightly transparent background for depth effect
+const BG = /* "#0c0a07";*/ "rgba(74, 0, 128, 0.18)"; // Slightly transparent background for depth effect
 
 // ─── SVG helpers ─────────────────────────────────────────────────────────────
 // Componentes React que desenham arte vetorial usada como fundo e elementos
