@@ -625,7 +625,7 @@ function Award() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
               style={{ background: GOLD, color: BG }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#d4aa4c")}
               onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
             >
               Visit the Jam Museum <span aria-hidden>→</span>
