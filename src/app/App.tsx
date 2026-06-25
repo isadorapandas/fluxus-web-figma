@@ -387,11 +387,11 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* Soft gradient fade at the bottom of the hero section */}
+      {/* Soft gradient fade at the bottom of the hero section 
       <div
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
         style={{ background: `linear-gradient(to top, ${BG}, transparent)` }}
-      />
+      />*/}
     </section>
   );
 }
