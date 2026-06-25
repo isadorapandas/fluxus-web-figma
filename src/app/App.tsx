@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion, rgba } from "motion/react";
 
 // ─── Design constants ────────────────────────────────────────────────────────
 // Cores usadas em todo o site para texto, bordas e elementos decorativos.
@@ -105,7 +105,7 @@ function MedalSvg() {
         fontFamily="'JetBrains Mono', monospace"
         opacity="0.5"
       >
-        LUGAR
+        PLACE
       </text>
     </svg>
   );
@@ -170,7 +170,7 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
 // ─── Navigation bar and scroll state ─────────────────────────────────────────
 // NAV_LINKS defines the page sections available in the main navigation menu.
 const NAV_LINKS = [
-  { href: "#about", label: "About the game" },
+  { href: "#about", label: "About" },
   { href: "#features", label: "Development" },
   { href: "#award", label: "Marble World Jam" },
   { href: "#team", label: "Team" },
@@ -291,7 +291,7 @@ function Hero() {
         >
           {/* Gaming slogan  above the title */}
           <p
-            className="font-mono text-[15px] tracking-[0.5em] uppercase mb-7"
+            className="font-mono text-[17px] tracking-[0.5em] uppercase mb-7"
             style={{ color: GOLD }}
           >
             ENTER THE IMPOSSIBLE.
@@ -322,11 +322,15 @@ function Hero() {
             className="font-body text-xl leading-[1.7] mb-10 max-w-md"
             style={{ color: TEXT_DIM }}
           >
-            A geometria se torna narrativa. O espaço se torna enigma.
-            Um puzzle-aventura 3D imersivo inspirado na{" "}
+            Explore recursive worlds, impossible portals, and non-Euclidean spaces where every threshold rewrites the rules of space.
+            Geometry becomes narrative. Space becomes puzzle.
+            An immersive 3D puzzle-adventure inspired by M.&nbsp;C.&nbsp;Escher {" "}
+            <em style={{ color: "rgba(196,154,60,0.85)", fontStyle: "italic" }}>Print Gallery</em>{" "}
+            — where impossible worlds become fully navigable.
+            {/*Um puzzle-aventura 3D imersivo inspirado na{" "}
             <em style={{ color: "rgba(196,154,60,0.85)", fontStyle: "italic" }}>Galeria de Gravuras</em>{" "}
             de M.&nbsp;C.&nbsp;Escher — onde mundos impossíveis se tornam
-            completamente navegáveis.
+            completamente navegáveis. */} 
           </p>
 
           {/* Hero call-to-action buttons: play now and scroll down */}
@@ -337,10 +341,21 @@ function Hero() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
               style={{ background: GOLD, color: BG }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#d4aa4c")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
               onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
             >
-              Jogar Agora <span aria-hidden>→</span>
+              PLAY NOW <span aria-hidden>→</span>
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=V5vRlMJPbjc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
+              style={{ background: BG, color: GOLD }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+            >
+              WATCH TRAILER <span aria-hidden>→</span>
             </a>
             <a
               href="#about"
@@ -378,7 +393,7 @@ function About() {
       {/* About section wrapper with padding and layout constraints */}
       <div className="max-w-7xl mx-auto px-8">
         {/* Section title divider component */}
-        <Divider label="Sobre o Jogo" />
+        <Divider label="About the game" />
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-20 items-start">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -483,7 +498,7 @@ function Features() {
     <section id="features" className="relative py-36">
       <div className="max-w-7xl mx-auto px-8">
         {/* Section title and explanation for the mechanics section */}
-        <Divider label="Mecânicas" />
+        <Divider label="Development" />
         <h2
           className="font-heading font-bold leading-[0.9] text-center mb-16"
           style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", color: TEXT }}
@@ -593,7 +608,7 @@ function Award() {
             className="font-heading font-black leading-[0.88] mb-7"
             style={{ fontSize: "clamp(4rem, 10vw, 8rem)", color: TEXT }}
           >
-            2° Lugar
+            2nd Place
           </h2>
           <p
             className="font-body text-lg leading-[1.7] max-w-xl mx-auto"
@@ -603,6 +618,18 @@ function Award() {
             desenvolvido com Marble 1.1. Reconhecimento pela inovação na
             interseção entre matemática, arte generativa e design de jogos.
           </p>
+
+          <a
+              href="https://jam.worldlabs.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
+              style={{ background: GOLD, color: BG }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+            >
+              Visit the Jam Museum <span aria-hidden>→</span>
+            </a>
 
           <div className="flex items-center justify-center gap-6 mt-12">
             <div className="h-px w-20" style={{ background: GOLD_MID }} />
@@ -719,14 +746,14 @@ function Footer() {
             className="font-mono text-[9px] tracking-[0.28em] uppercase"
             style={{ color: "rgba(224,212,188,0.22)" }}
           >
-            Geometria · Narrativa · Espaço · Enigma
+            Mathematics · Geometry · World Models · Magic · Puzzle
           </p>
         </div>
 
         {/* Footer link list rendered from a hard-coded array */}
         <div className="flex items-center gap-8">
           {[
-            { href: "https://visgraf.github.io/fluxus/", label: "Play →" },
+            { href: "https://visgraf.github.io/fluxus/", label: "PLAY NOW →" },
             /*{ href: "https://visgraf.github.io/worlds360/fluxus-1/", label: "Projeto →" },*/
             { href: "https://www.visgraf.impa.br/home/index.php", label: "Visgraf LAB →" },
             { href: "https://www.visgraf.impa.br/home/index.php", label: "Worlds 360 →" },
@@ -749,9 +776,9 @@ function Footer() {
         {/* Copyright text at the bottom of the page */}
         <p
           className="font-mono text-[9px] tracking-[0.12em] uppercase"
-          style={{ color: "rgba(224,212,188,0.16)" }}
+          style={{ color: /*"rgba(224,212,188,0.16)" */ GOLD_DIM }}
         >
-          © 2024 VISGRAF
+          © 2026 VISGRAF
         </p>
       </div>
     </footer>
