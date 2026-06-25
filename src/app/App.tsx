@@ -580,7 +580,7 @@ function Award() {
       />
 
       <div className="relative z-10 max-w-3xl mx-auto px-8 text-center">
-        <Divider label="Reconhecimento" />
+        <Divider label="Recognition" />
 
         <motion.div
           className="flex justify-center mb-12"
@@ -618,15 +618,15 @@ function Award() {
             desenvolvido com Marble 1.1. Reconhecimento pela inovação na
             interseção entre matemática, arte generativa e design de jogos.
           </p>
-
+          <p >  </p>
           <a
               href="https://jam.worldlabs.ai/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
-              style={{ background: GOLD, color: BG }}
+              style={{ background: BG, color: BG }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "#d4aa4c")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = BG)}
             >
               Visit the Jam Museum <span aria-hidden>→</span>
             </a>
