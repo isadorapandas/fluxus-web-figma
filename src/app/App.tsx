@@ -237,7 +237,7 @@ function Nav({ active }: { active: string }) {
           style={{ border: `1px solid ${GOLD_MID}`, color: GOLD }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = GOLD;
-            e.currentTarget.style.color = "#4b0080";
+            e.currentTarget.style.color = "#2d034c";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "transparent";
@@ -341,8 +341,14 @@ function Hero() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
               style={{ background: GOLD, color: BG }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+              onMouseEnter={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = GOLD;
+              }}
+              onMouseLeave={(e) => {
+              e.currentTarget.style.background = GOLD;
+              e.currentTarget.style.color = "#2d034c";
+              }}
             >
               PLAY NOW <span aria-hidden>→</span>
             </a>
@@ -351,9 +357,15 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
-              style={{ background: BG, color: GOLD }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#62259926" /*"#d4aa4c"*/)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+              style={{ border: `1px solid ${GOLD_MID}`, color: GOLD }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = GOLD;
+                e.currentTarget.style.color = "#2d034c";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = GOLD;
+              }}
             >
               WATCH TRAILER <span aria-hidden>→</span>
             </a>
@@ -361,8 +373,12 @@ function Hero() {
               href="#about"
               className="font-mono text-[10px] tracking-[0.25em] uppercase transition-colors duration-300"
               style={{ color: TEXT_FAINT }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = TEXT_FAINT)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = GOLD;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = TEXT_FAINT;
+              }}
             >
               Explorar ↓
             </a>
@@ -624,9 +640,15 @@ function Award() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
-              style={{ background: GOLD, color: BG }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = BG )}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#d4aa4c")}
+              style={{ border: `1px solid ${GOLD_MID}`, color: GOLD }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = GOLD;
+                e.currentTarget.style.color = "#2d034c";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = GOLD;
+              }}
             >
               Visit the Jam Museum <span aria-hidden>→</span>
             </a>
