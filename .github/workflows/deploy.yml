@@ -2,16 +2,17 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: "main" # Substitua pelo nome da sua branch principal (ex: master ou main)
+    branches: 'main' # Ou 'master', dependendo da sua branch padrão
 
-# Permissões necessárias para publicar no Pages
+# Permite que o fluxo de trabalho tenha permissão para implantar no GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Garante que apenas uma implantação seja executada por vez
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -28,10 +29,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # Se houver um package-lock.json, usa 'npm ci', caso contrário roda 'npm install'
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Build
         run: npm run build
