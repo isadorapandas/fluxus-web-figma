@@ -1,0 +1,6 @@
+{
+  "name": "Fluxus Game Website",
+  "description": "Website design for Fluxus, a 3D puzzle-adventure game inspired by M.C. Escher's artwork, showcasing gameplay features, achievements, and creators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
