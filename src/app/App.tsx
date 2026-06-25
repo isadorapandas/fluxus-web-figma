@@ -618,7 +618,7 @@ function Award() {
             desenvolvido com Marble 1.1. Reconhecimento pela inovação na
             interseção entre matemática, arte generativa e design de jogos.
           </p>
-          <br>  </br>
+          <br/>
           <a
               href="https://jam.worldlabs.ai/"
               target="_blank"
