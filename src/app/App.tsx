@@ -2,15 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 
 // ─── Design constants ────────────────────────────────────────────────────────
+// Cores usadas em todo o site para texto, bordas e elementos decorativos.
 const GOLD = "#c49a3c";
 const GOLD_DIM = "rgba(196,154,60,0.18)";
 const GOLD_MID = "rgba(196,154,60,0.45)";
 const TEXT = "#e0d4bc";
 const TEXT_DIM = "rgba(224,212,188,0.58)";
 const TEXT_FAINT = "rgba(224,212,188,0.28)";
-const BG = "#0c0a07";
+const BG = /* "#0c0a07";*/ "rgba(74, 0, 128, 0.18)"; // Slightly transparent background for depth effect
 
 // ─── SVG helpers ─────────────────────────────────────────────────────────────
+// Componentes React que desenham arte vetorial usada como fundo e elementos
+// gráficos decorativos na página.
 
 function RecursiveSquares({
   depth = 8,
@@ -41,7 +44,8 @@ function RecursiveSquares({
           />
         );
       })}
-      {/* Spiral connectors between corners */}
+      {/* Desenha linhas de conexão em espiral entre os cantos dos quadrados.
+          Esses elementos reforçam o estilo geométrico e o efeito de profundidade. */}
       {Array.from({ length: depth - 1 }, (_, i) => {
         const s0 = Math.pow(0.75, i) * 190;
         const s1 = Math.pow(0.75, i + 1) * 190;
@@ -64,6 +68,7 @@ function RecursiveSquares({
   );
 }
 
+// MedalSvg renders the golden medal graphic used in the Award section.
 function MedalSvg() {
   const rays = Array.from({ length: 20 }, (_, i) => {
     const angle = (i * 18 * Math.PI) / 180;
@@ -109,6 +114,8 @@ function MedalSvg() {
 // ─── Grid background ─────────────────────────────────────────────────────────
 
 function GridBg() {
+  // This fixed <div> draws the subtle grid background covering the entire viewport.
+  // It is purely decorative and does not interfere with pointer events.
   return (
     <div
       className="fixed inset-0 pointer-events-none"
@@ -125,6 +132,8 @@ function GridBg() {
 // ─── Section divider ─────────────────────────────────────────────────────────
 
 function Divider({ label }: { label: string }) {
+  // Divider renders a horizontal section title bar with gradient lines on each side.
+  // Use it before each major page section to keep the layout consistent.
   return (
     <div className="flex items-center gap-6 mb-20">
       <div className="h-px flex-1" style={{ background: `linear-gradient(to right, transparent, ${GOLD_MID})` }} />
@@ -142,6 +151,8 @@ function Divider({ label }: { label: string }) {
 // ─── Corner bracket ornament ─────────────────────────────────────────────────
 
 function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
+  // Corner renders a small decorative bracket in one of the four page corners.
+  // It is used to create a subtle frame around the page content.
   const cls = {
     tl: "top-0 left-0 border-t border-l",
     tr: "top-0 right-0 border-t border-r",
@@ -156,19 +167,21 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
   );
 }
 
-// ─── Nav ─────────────────────────────────────────────────────────────────────
-
+// ─── Navigation bar and scroll state ─────────────────────────────────────────
+// NAV_LINKS defines the page sections available in the main navigation menu.
 const NAV_LINKS = [
-  { href: "#about", label: "Sobre" },
-  { href: "#features", label: "Mecânicas" },
-  { href: "#award", label: "Prêmio" },
-  { href: "#team", label: "Equipe" },
+  { href: "#about", label: "About the game" },
+  { href: "#features", label: "Development" },
+  { href: "#award", label: "Marble World Jam" },
+  { href: "#team", label: "Team" },
 ];
 
 function Nav({ active }: { active: string }) {
+  // `scrolled` controls the nav background and border when the page scrolls.
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    // Add a scroll listener to update the navigation style after scrolling down.
     const fn = () => setScrolled(window.scrollY > 48);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
@@ -184,6 +197,7 @@ function Nav({ active }: { active: string }) {
       }}
     >
       <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+        {/* Site brand link that scrolls the page to the home section */}
         <a
           href="#home"
           className="font-heading font-bold text-xl tracking-[0.4em] uppercase transition-colors duration-300 hover:opacity-80"
@@ -192,6 +206,7 @@ function Nav({ active }: { active: string }) {
           Fluxus
         </a>
 
+        {/* Desktop navigation links for the main sections */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map(({ href, label }) => {
             const id = href.slice(1);
@@ -213,6 +228,7 @@ function Nav({ active }: { active: string }) {
           })}
         </div>
 
+        {/* Primary call-to-action button linking to the playable demo */}
         <a
           href="https://visgraf.github.io/fluxus/"
           target="_blank"
@@ -228,19 +244,18 @@ function Nav({ active }: { active: string }) {
             e.currentTarget.style.color = GOLD;
           }}
         >
-          Jogar →
+          Play Now →
         </a>
       </div>
     </nav>
   );
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
-
+// ─── Hero section with animated background visuals ─────────────────────────
 function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Rotating recursive geometry — right side */}
+      {/* Large rotating decorative geometry placed on the right side */}
       <motion.div
         className="absolute right-[-8%] top-[50%] w-[58vw] max-w-[820px] aspect-square opacity-55"
         style={{ translateY: "-50%" }}
@@ -250,7 +265,7 @@ function Hero() {
         <RecursiveSquares depth={9} angleStep={4} />
       </motion.div>
 
-      {/* Smaller counter-rotating geometry */}
+      {/* Smaller counter-rotating decorative geometry for depth */}
       <motion.div
         className="absolute right-[5%] top-[50%] w-[24vw] max-w-[360px] aspect-square opacity-20"
         style={{ translateY: "-50%" }}
@@ -260,13 +275,13 @@ function Hero() {
         <RecursiveSquares depth={5} angleStep={8} />
       </motion.div>
 
-      {/* Corner ornaments */}
+      {/* Four corner accent lines to frame the hero section visually */}
       <div className="absolute top-20 left-6 w-12 h-12" style={{ borderTop: `1px solid ${GOLD_MID}`, borderLeft: `1px solid ${GOLD_MID}` }} />
       <div className="absolute top-20 right-6 w-12 h-12" style={{ borderTop: `1px solid ${GOLD_MID}`, borderRight: `1px solid ${GOLD_MID}` }} />
       <div className="absolute bottom-10 left-6 w-12 h-12" style={{ borderBottom: `1px solid ${GOLD_MID}`, borderLeft: `1px solid ${GOLD_MID}` }} />
       <div className="absolute bottom-10 right-6 w-12 h-12" style={{ borderBottom: `1px solid ${GOLD_MID}`, borderRight: `1px solid ${GOLD_MID}` }} />
 
-      {/* Hero content */}
+      {/* Main hero content block centered on the page */}
       <div className="relative z-10 max-w-7xl mx-auto px-8 pt-24 pb-20 w-full">
         <motion.div
           className="max-w-2xl"
@@ -274,13 +289,15 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Gaming slogan  above the title */}
           <p
-            className="font-mono text-[10px] tracking-[0.5em] uppercase mb-7"
+            className="font-mono text-[15px] tracking-[0.5em] uppercase mb-7"
             style={{ color: GOLD }}
           >
-            Marble World Jam · 2° Lugar
+            ENTER THE IMPOSSIBLE.
           </p>
 
+          {/* Main title of the webpage */}
           <h1
             className="font-heading font-black tracking-tight leading-[0.86] mb-9"
             style={{
@@ -292,6 +309,15 @@ function Hero() {
             FLUXUS
           </h1>
 
+          {/* Subtitle with competition recognition */}
+          <p
+            className="font-mono text-[10px] tracking-[0.5em] uppercase mb-7"
+            style={{ color: GOLD }}
+          >
+            Marble World Jam · 2nd place
+          </p>
+
+          {/* Paragraph describing the project theme and inspiration */}
           <p
             className="font-body text-xl leading-[1.7] mb-10 max-w-md"
             style={{ color: TEXT_DIM }}
@@ -303,6 +329,7 @@ function Hero() {
             completamente navegáveis.
           </p>
 
+          {/* Hero call-to-action buttons: play now and scroll down */}
           <div className="flex flex-wrap items-center gap-6">
             <a
               href="https://visgraf.github.io/fluxus/"
@@ -328,7 +355,7 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* Bottom fade */}
+      {/* Soft gradient fade at the bottom of the hero section */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
         style={{ background: `linear-gradient(to top, ${BG}, transparent)` }}
@@ -337,8 +364,7 @@ function Hero() {
   );
 }
 
-// ─── About ────────────────────────────────────────────────────────────────────
-
+// ─── About section content and math concept cards ───────────────────────────
 const MATH_CONCEPTS = [
   { label: "Geometria de Möbius", desc: "Base matemática do universo do jogo" },
   { label: "Esfera de Riemann", desc: "Fundamento topológico dos espaços" },
@@ -349,7 +375,9 @@ const MATH_CONCEPTS = [
 function About() {
   return (
     <section id="about" className="relative py-36">
+      {/* About section wrapper with padding and layout constraints */}
       <div className="max-w-7xl mx-auto px-8">
+        {/* Section title divider component */}
         <Divider label="Sobre o Jogo" />
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_3fr] gap-20 items-start">
           <motion.div
@@ -358,6 +386,7 @@ function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* Main about text with heading and descriptive paragraphs */}
             <h2
               className="font-heading font-bold leading-[0.9] mb-8"
               style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", color: TEXT }}
@@ -380,6 +409,7 @@ function About() {
               className="pl-6 py-1"
               style={{ borderLeft: `2px solid ${GOLD_MID}` }}
             >
+              {/* Highlighted quote block inside the about section */}
               <p className="font-body text-base italic" style={{ color: "rgba(224,212,188,0.4)" }}>
                 "O impossível, em Fluxus, não é uma limitação — é o caminho."
               </p>
@@ -393,6 +423,7 @@ function About() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* Map math concept cards to the right-side panel */}
             {MATH_CONCEPTS.map(({ label, desc }) => (
               <div
                 key={label}
@@ -423,8 +454,7 @@ function About() {
   );
 }
 
-// ─── Features ─────────────────────────────────────────────────────────────────
-
+// ─── Features section cards describing gameplay mechanics ───────────────────
 const FEATURES = [
   {
     icon: "◈",
@@ -452,6 +482,7 @@ function Features() {
   return (
     <section id="features" className="relative py-36">
       <div className="max-w-7xl mx-auto px-8">
+        {/* Section title and explanation for the mechanics section */}
         <Divider label="Mecânicas" />
         <h2
           className="font-heading font-bold leading-[0.9] text-center mb-16"
@@ -472,7 +503,7 @@ function Features() {
               onMouseEnter={(e) => (e.currentTarget.style.border = `1px solid ${GOLD_MID}`)}
               onMouseLeave={(e) => (e.currentTarget.style.border = `1px solid ${GOLD_DIM}`)}
             >
-              {/* Hover grid overlay */}
+              {/* Subtle hover grid that appears when the card is hovered */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
@@ -482,6 +513,7 @@ function Features() {
                 }}
               />
 
+              {/* Icon representing the feature */}
               <span
                 className="block text-5xl leading-none mb-6"
                 style={{ color: GOLD, fontFamily: "serif" }}
@@ -498,7 +530,7 @@ function Features() {
                 {f.desc}
               </p>
 
-              {/* Bottom-right corner accent */}
+              {/* Decorative accent in the bottom-right corner of each feature card */}
               <div
                 className="absolute bottom-0 right-0 w-7 h-7 transition-colors duration-300"
                 style={{
@@ -589,8 +621,7 @@ function Award() {
   );
 }
 
-// ─── Team ─────────────────────────────────────────────────────────────────────
-
+// ─── Team section with project contributors ─────────────────────────────────
 const TEAM = [
   { name: "Bernardo Dias", initials: "BD" },
   { name: "Enzo Ribeiro", initials: "ER" },
@@ -611,6 +642,7 @@ function Team() {
           Os Criadores<br />do Impossível
         </h2>
 
+        {/* Team cards created from the TEAM list */}
         <div className="flex flex-wrap justify-center gap-4">
           {TEAM.map((member, i) => (
             <motion.div
@@ -624,6 +656,7 @@ function Team() {
               onMouseEnter={(e) => (e.currentTarget.style.border = `1px solid ${GOLD_MID}`)}
               onMouseLeave={(e) => (e.currentTarget.style.border = `1px solid ${GOLD_DIM}`)}
             >
+              {/* Circular avatar with initials for each team member */}
               <div
                 className="w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-105"
                 style={{ border: `1px solid ${GOLD_MID}` }}
@@ -639,6 +672,7 @@ function Team() {
           ))}
         </div>
 
+        {/* Footer-style credit line inside the team section */}
         <motion.div
           className="mt-20 text-center"
           initial={{ opacity: 0 }}
@@ -665,14 +699,14 @@ function Team() {
   );
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
-
+// ─── Footer section with external links and copyright notice ──────────────
 function Footer() {
   return (
     <footer
       className="relative py-12"
       style={{ borderTop: `1px solid rgba(196,154,60,0.1)` }}
     >
+      {/* Footer container with brand label, useful links, and copyright text */}
       <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-8">
         <div>
           <p
@@ -689,10 +723,13 @@ function Footer() {
           </p>
         </div>
 
+        {/* Footer link list rendered from a hard-coded array */}
         <div className="flex items-center gap-8">
           {[
-            { href: "https://visgraf.github.io/fluxus/", label: "Jogar →" },
-            { href: "https://visgraf.github.io/worlds360/fluxus-1/", label: "Projeto →" },
+            { href: "https://visgraf.github.io/fluxus/", label: "Play →" },
+            /*{ href: "https://visgraf.github.io/worlds360/fluxus-1/", label: "Projeto →" },*/
+            { href: "https://www.visgraf.impa.br/home/index.php", label: "Visgraf LAB →" },
+            { href: "https://www.visgraf.impa.br/home/index.php", label: "Worlds 360 →" },
           ].map(({ href, label }) => (
             <a
               key={href}
@@ -709,6 +746,7 @@ function Footer() {
           ))}
         </div>
 
+        {/* Copyright text at the bottom of the page */}
         <p
           className="font-mono text-[9px] tracking-[0.12em] uppercase"
           style={{ color: "rgba(224,212,188,0.16)" }}
@@ -723,9 +761,12 @@ function Footer() {
 // ─── App root ─────────────────────────────────────────────────────────────────
 
 export default function App() {
+  // `active` tracks which section is currently visible on the screen.
+  // This value is passed to <Nav /> so the nav link for the visible section can be highlighted.
   const [active, setActive] = useState("home");
 
   useEffect(() => {
+    // Observe each section by its `id` to detect when it enters the viewport.
     const ids = ["home", "about", "features", "award", "team"];
     const obs = new IntersectionObserver(
       (entries) => {
@@ -735,17 +776,23 @@ export default function App() {
       },
       { threshold: 0.3 }
     );
+
     ids.forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
+
+    // Disconnect the observer when the component unmounts.
     return () => obs.disconnect();
   }, []);
 
   return (
     <div style={{ background: BG, color: TEXT, minHeight: "100vh", overflowX: "hidden" }}>
+      {/* Background grid layer behind all content */}
       <GridBg />
+      {/* Sticky top navigation bar */}
       <Nav active={active} />
+      {/* Main content sections of the page */}
       <main className="relative z-10">
         <Hero />
         <About />
@@ -753,6 +800,7 @@ export default function App() {
         <Award />
         <Team />
       </main>
+      {/* Footer shown at the end of the page */}
       <Footer />
     </div>
   );
