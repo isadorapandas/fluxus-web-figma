@@ -9,7 +9,7 @@ const GOLD_MID = "rgba(196,154,60,0.45)";
 const TEXT = "#e0d4bc";
 const TEXT_DIM = "rgba(224,212,188,0.58)";
 const TEXT_FAINT = "rgba(224,212,188,0.28)";
-const BG = /* "#0c0a07";*/ "rgba(74, 0, 128, 0.18)"; // Slightly transparent background for depth effect
+const BG = /* "#0c0a07";*/ "rgb(44, 1, 75)"; // Slightly transparent background for depth effect
 
 // ─── SVG helpers ─────────────────────────────────────────────────────────────
 // Componentes React que desenham arte vetorial usada como fundo e elementos
@@ -340,8 +340,9 @@ function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300"
-              style={{ background: GOLD, color: BG }}
+              style={{ background: GOLD, color: "#2d034c" }}
               onMouseEnter={(e) => {
+              e.currentTarget.style.border = `1px solid ${GOLD_MID}`;
               e.currentTarget.style.background = "transparent";
               e.currentTarget.style.color = GOLD;
               }}
